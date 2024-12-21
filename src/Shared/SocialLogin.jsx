@@ -5,6 +5,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import { ImSpinner9 } from "react-icons/im";
 import useAuth from "../hooks/useAuth";
+import { storeUserInDB } from "../Component/utilities/utilities";
 
 const SocialLogin = () => {
   const {googleSignIn,loader,setLoader}=useAuth();
@@ -21,6 +22,8 @@ const handleGoogleLogin = () => {
     .then((result) => {
     //   console.log(result);
       navigate(from)
+      const user = { name: result?.user?.displayName, email: result?.user?.email,photo:result?.user?.photoURL }
+      storeUserInDB(user);
       setLoader(false)
      toast.success('Login Successfull')
     })

@@ -7,6 +7,7 @@ import useAuth from "../../hooks/useAuth";
 
 import { ImSpinner9 } from "react-icons/im";
 import SocialLogin from "../../Shared/SocialLogin";
+import { storeUserInDB } from "../../Component/utilities/utilities";
 const SignUp = () => {
   const {createUser,loader,setLoader}=useAuth()
     const [confirmPassword, setConfirmPassword] = useState('');
@@ -45,6 +46,8 @@ const handleConfirmPasswordChange = (e) => {
             reset()
             setLoader(false)
           toast.success('Registration Success')
+          const user = {name:data.name,email:data.email,photo:data.photoURL}
+          storeUserInDB(user);
           
           
         })
