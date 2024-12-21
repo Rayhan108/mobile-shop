@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
+import toast from "react-hot-toast";
 
 const Navbar = () => {
+    const {user,logout}=useAuth();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+// console.log(user);
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
@@ -16,6 +19,15 @@ const Navbar = () => {
   const toggleTheme = () => {
     setTheme(theme === 'dark' ? 'light' : 'dark');
   };
+  const handleLogOut = () => {
+    logout()
+      .then(()=>{
+        toast.success('Logout Success')
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
+  };
 
     return (
         <div className="navbar bg-base-100 fixed top-0 z-50 shadow-lg">
@@ -25,8 +37,8 @@ const Navbar = () => {
         <div className="flex-none hidden lg:block">
           <ul className="menu menu-horizontal px-1">
             <li><Link to="/">Home</Link></li>
+            <li><Link href="#services">Product</Link></li>
             <li><Link href="#about">About</Link></li>
-            <li><Link href="#services">Services</Link></li>
             <li><Link href="#contact">Contact</Link></li>
           </ul>
         </div>
@@ -54,9 +66,13 @@ const Navbar = () => {
             )}
           </button>
           <div className="dropdown dropdown-end">
-            <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+
+      <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
               <div className="w-10 rounded-full">
-                <img src="https://i.pravatar.cc/150?img=3" alt="User" />
+              <div className="tooltip tooltip-bottom z-[10]" data-tip={user?.displayName}>
+              <img src={user?.photoURL || "https://i.pravatar.cc/150?img=3"} alt="User" />
+               
+              </div>
               </div>
             </label>
             <ul tabIndex={0} className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52">
@@ -65,8 +81,9 @@ const Navbar = () => {
                   Profile
                 </a>
               </li>
-              <li><a href="#settings">Settings</a></li>
-              <li><a href="#logout">Logout</a></li>
+              <li><Link >DashBoard</Link></li>
+              {user? <Link className="ml-4" onClick={handleLogOut}>LogOut</Link>
+         : <Link to="/login" className="ml-4">Login</Link>}
             </ul>
           </div>
         </div>
