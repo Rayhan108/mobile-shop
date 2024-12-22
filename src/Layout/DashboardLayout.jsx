@@ -1,22 +1,24 @@
-
+import { TbJewishStar } from "react-icons/tb";
 import { useState } from 'react';
-import { FaHome, FaMobileAlt, FaUsers, FaChartLine, FaCog } from 'react-icons/fa';
+import { FaHome, FaMobileAlt, FaUsers,FaCog } from 'react-icons/fa';
 import { Link, Outlet } from 'react-router-dom';
+import useSeller from '../hooks/useSeller';
+import useAdmin from '../hooks/useAdmin';
 
 const DashboardLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-
+  const [isSeller] = useSeller();
+  const [isAdmin] = useAdmin();
+  
+  // if(isLoading || isSellerLoading){
+  //   return <div className="flex md:mt-64 items-center justify-center ">
+  //     <div className="radial-progress animate-spin" style={{"--value":70}}>70%</div>
+  //   </div>
+  // }
   return (
     <div className="flex h-screen bg-gray-100">
-      {/* Mobile Sidebar Toggle */}
-      {/* <div className="md:hidden flex items-center justify-between px-6 py-4 bg-indigo-600 text-white">
-        <div className="text-2xl font-bold">NextGen Phones</div>
-        <button onClick={() => setSidebarOpen(!sidebarOpen)} className="focus:outline-none">
-          <FaCog size={24} />
-        </button>
-      </div> */}
-
-      {/* Sidebar */}
+       
+       {/* Sidebar  */}
       <aside className={`fixed inset-y-0 left-0 z-30 w-40 bg-indigo-50 shadow-md p-6 transform ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0 transition-transform duration-300 ease-in-out md:relative md:w-64 lg:w-72 xl:w-80`}>
         <div className="text-2xl font-bold text-indigo-600 mb-10 hidden md:block">NextGen Phones</div>
         <nav>
@@ -34,30 +36,56 @@ const DashboardLayout = () => {
                 <span>Dashboard</span>
               </Link>
             </li>
+            {/* admin route */}
+      {isAdmin && (
+        <>
             <li className="mb-6">
+              <Link to="/dashboard/manageUser" className="flex items-center space-x-4 text-gray-700 hover:text-indigo-600">
+                <FaUsers />
+                <span>Manage User</span>
+              </Link>
+            </li>
+      </>)}
+      {/* seller route */}
+           {isSeller && (
+            <>
+             <li className="mb-6">
+              <Link to="/dashboard/addProducts" className="flex items-center space-x-4 text-gray-700 hover:text-indigo-600">
+                <FaMobileAlt />
+                <span>Add Products</span>
+              </Link>
+            </li>
+            <li className="mb-6">
+              <Link to="/dashboard/allProducts" className="flex items-center space-x-4 text-gray-700 hover:text-indigo-600">
+                <FaMobileAlt />
+                <span>All Products</span>
+              </Link>
+            </li>
+            <li className="mb-6">
+              <Link to="/settings" className="flex items-center space-x-4 text-gray-700 hover:text-indigo-600">
+                <FaCog />
+                <span>Manage Product</span>
+              </Link>
+            </li>
+            </>
+           )}
+           {/* buyer route */}
+           {isSeller && (
+            <>
+             <li className="mb-6">
               <Link to="/products" className="flex items-center space-x-4 text-gray-700 hover:text-indigo-600">
                 <FaMobileAlt />
                 <span>Products</span>
               </Link>
             </li>
             <li className="mb-6">
-              <Link to="/customers" className="flex items-center space-x-4 text-gray-700 hover:text-indigo-600">
-                <FaUsers />
-                <span>Customers</span>
+              <Link to="/wishList" className="flex items-center space-x-4 text-gray-700 hover:text-indigo-600">
+              <TbJewishStar />
+                <span>Wish List</span>
               </Link>
             </li>
-            <li className="mb-6">
-              <Link to="/analytics" className="flex items-center space-x-4 text-gray-700 hover:text-indigo-600">
-                <FaChartLine />
-                <span>Analytics</span>
-              </Link>
-            </li>
-            <li className="mb-6">
-              <Link to="/settings" className="flex items-center space-x-4 text-gray-700 hover:text-indigo-600">
-                <FaCog />
-                <span>Settings</span>
-              </Link>
-            </li>
+            </>
+           )}
           </ul>
         </nav>
       </aside>
