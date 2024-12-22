@@ -48,9 +48,9 @@ const Login = () => {
   <Helmet>
   <title>NextGen Phones| Login</title>
   </Helmet>
-  <div className="flex items-center justify-center min-h-screen bg-gray-200 ">
+  <div className="flex items-center justify-center min-h-screen  ">
       
-      <div className="max-w-md w-full px-6 py-8 bg-white rounded-lg shadow-md">
+      <div className="max-w-md w-full px-6 py-8 bg-gray-100 border  border-black shadow-2xl rounded-lg ">
         <h2 className="text-2xl font-semibold text-center text-gray-800 mb-4">
           Login
         </h2>

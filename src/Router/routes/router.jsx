@@ -7,6 +7,9 @@ import SignUp from "../../Page/SignUp/SignUp";
 import DashboardLayout from "../../Layout/DashboardLayout";
 import PrivetRoute from "../PrivetRoutes/PrivetRoute";
 
+import AdminRoutes from "../AdminRoutes/AdminRoutes";
+import ManageUsers from "../../Page/Dashboard/Admin/ManageUser/ManageUser";
+
 const router = createBrowserRouter([
     {
       path: "/",
@@ -29,7 +32,7 @@ const router = createBrowserRouter([
       ],
     },
     {
-      path: "/dashboard",
+      path: "dashboard",
       element: (
         <PrivetRoute>
           <DashboardLayout/>
@@ -37,10 +40,12 @@ const router = createBrowserRouter([
       ),
       errorElement: <ErrorPage></ErrorPage>,
       children: [
-        // {
-        //   path: "",
-        //   element: 
-        // },
+        {
+          path: "manageUser",
+          element: <ManageUsers/>
+          // <AdminRoutes>
+          //   </AdminRoutes>
+        },
        
       ],
     },

@@ -59,8 +59,8 @@ const handleConfirmPasswordChange = (e) => {
     
     };
   return (
-    <div className="flex pt-[150px] items-center justify-center min-h-screen bg-gray-100 ">
-      <div className="max-w-md w-full px-6 py-8 bg-white rounded-lg shadow-md">
+    <div className="flex pt-[150px] items-center justify-center min-h-screen ">
+      <div className="max-w-md w-full px-6 py-8 bg-gray-100 border  border-black shadow-2xl rounded-lg ">
         <h2 className="text-2xl font-semibold text-center text-gray-800 mb-4">
           Sign Up
         </h2>

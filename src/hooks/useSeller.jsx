@@ -8,8 +8,8 @@ const useSeller = () => {
         queryKey:['isSeller',user?.email],
         enabled:!loader,
         queryFn:async ()=>{
-            const res=await axios.get(`http://localhost:5000/seller/${user.email}`)
-            return res.data.instructor;
+            const res=await axios.get(`http://localhost:5000/seller/${user?.email}`)
+            return res.data.seller;
         }
     })
     return [isSeller,isSellerLoading]
