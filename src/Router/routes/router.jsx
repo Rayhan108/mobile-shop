@@ -4,6 +4,8 @@ import ErrorPage from "../../Page/ErrorPage/ErrorPage";
 import Home from "../../Page/Home/Home/Home";
 import Login from "../../Page/Login/Login";
 import SignUp from "../../Page/SignUp/SignUp";
+import DashboardLayout from "../../Layout/DashboardLayout";
+import PrivetRoute from "../PrivetRoutes/PrivetRoute";
 
 const router = createBrowserRouter([
     {
@@ -23,6 +25,22 @@ const router = createBrowserRouter([
           path: "/signUp",
           element:<SignUp/>,
         },
+       
+      ],
+    },
+    {
+      path: "/dashboard",
+      element: (
+        <PrivetRoute>
+          <DashboardLayout/>
+        </PrivetRoute>
+      ),
+      errorElement: <ErrorPage></ErrorPage>,
+      children: [
+        // {
+        //   path: "",
+        //   element: 
+        // },
        
       ],
     },
