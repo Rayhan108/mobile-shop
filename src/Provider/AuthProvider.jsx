@@ -10,7 +10,7 @@ import {
   
 } from "firebase/auth";
 import { app } from "../firebase/firebase.congiq";
-import axios from "axios";
+// import axios from "axios";
 export const AuthContext = createContext(null);
 const auth = getAuth(app);
 // eslint-disable-next-line react/prop-types
