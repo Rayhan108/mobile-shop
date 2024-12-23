@@ -4,7 +4,6 @@ import axios from "axios";
 
 import { Link } from "react-router-dom";
 
-
 import useAuth from "../../../hooks/useAuth";
 import SectionTitle from "../../../Component/SectionTitle/SectionTitle";
 import toast from "react-hot-toast";
@@ -12,30 +11,29 @@ import toast from "react-hot-toast";
 const AllProducts = () => {
   const { user } = useAuth();
 
-  const { data: products = [],refetch } = useQuery({
+  const { data: products = [], refetch } = useQuery({
     queryKey: ["products", user?.email],
     queryFn: async () => {
       const res = await axios.get(
-        `http://localhost:5000/product/${user?.email}`
+        `https://mobile-shop-server-weld.vercel.app/product/${user?.email}`
       );
       return res.data;
     },
   });
-  const handleDelete=(id)=>{
-    fetch( `http://localhost:5000/product/delete/${id}`,{
-        method:"DELETE",
+  const handleDelete = (id) => {
+    fetch(`https://mobile-shop-server-weld.vercel.app/product/delete/${id}`, {
+      method: "DELETE",
     })
-    .then(res=>res.json())
-    .then(data=>{
+      .then((res) => res.json())
+      .then((data) => {
         console.log(data);
-        if(data?.deletedCount
-        ){
-            refetch();
-            toast.success(`Successfully Deleted!`)
+        if (data?.deletedCount) {
+          refetch();
+          toast.success(`Successfully Deleted!`);
         }
-    })    
-  }
- 
+      });
+  };
+
   return (
     <div>
       <SectionTitle header={"My Products"}></SectionTitle>
@@ -82,24 +80,24 @@ const AllProducts = () => {
                   </span>
                 </td>
                 <td className="text-right">{eachProd?.price}</td>
-              
-      
+
                 <th>
                   <Link to={`/dashboard/updateProduct/${eachProd?._id}`}>
                     <button className="btn btn-ghost ">Update</button>
                   </Link>
                 </th>
                 <th>
-              
-                    <button onClick={() => handleDelete(eachProd?._id)} className="btn btn-ghost ">Delete</button>
-                
+                  <button
+                    onClick={() => handleDelete(eachProd?._id)}
+                    className="btn btn-ghost "
+                  >
+                    Delete
+                  </button>
                 </th>
-            
               </tr>
             ))}
           </tbody>
         </table>
-
       </div>
     </div>
   );

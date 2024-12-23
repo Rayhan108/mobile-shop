@@ -52,17 +52,23 @@ const router = createBrowserRouter([
       },
       {
         path: "/single-product/:id",
-        element:<PrivetRoute>
-          <ProductDetails/>
-        </PrivetRoute>,
-         loader:({params})=>fetch(`http://localhost:5000/single-product/${params.id}`)
+        element: (
+          <PrivetRoute>
+            <ProductDetails />
+          </PrivetRoute>
+        ),
+        loader: ({ params }) =>
+          fetch(
+            `https://mobile-shop-server-weld.vercel.app/single-product/${params.id}`
+          ),
       },
       {
         path: "/cart",
-        element:<PrivetRoute>
-          <MyCart/>
-        </PrivetRoute>,
-       
+        element: (
+          <PrivetRoute>
+            <MyCart />
+          </PrivetRoute>
+        ),
       },
     ],
   },
@@ -85,11 +91,7 @@ const router = createBrowserRouter([
       },
       {
         path: "wishList",
-        element: (
-         
-            <WishList />
-         
-        ),
+        element: <WishList />,
       },
       {
         path: "addProduct",

@@ -17,7 +17,7 @@ const AddProduct = () => {
     data.price = Number(data.price);
     data.quantity = Number(data.quantity);
 
-    fetch("http://localhost:5000/seller/addProduct", {
+    fetch("https://mobile-shop-server-weld.vercel.app/seller/addProduct", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
@@ -80,7 +80,9 @@ const AddProduct = () => {
                 <option value="tablet">Tablet</option>
               </select>
               {errors.category && (
-                <span className="text-red-600 text-sm">Category is required</span>
+                <span className="text-red-600 text-sm">
+                  Category is required
+                </span>
               )}
             </div>
 

@@ -7,7 +7,6 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
-  
 } from "firebase/auth";
 import { app } from "../firebase/firebase.congiq";
 // import axios from "axios";
@@ -25,9 +24,9 @@ const AuthProvider = ({ children }) => {
       setLoader(false);
       // console.log(currentUser);
 
-      //get jwt token 
+      //get jwt token
       // if(currentUser){
-      //   axios.post("http://localhost:5000/authentication",{ email:currentUser?.email,
+      //   axios.post("https://mobile-shop-server-weld.vercel.app/authentication",{ email:currentUser?.email,
       //   }).then((data)=>{
       //     if(data?.data){
       //       localStorage.setItem("access-token",data?.data?.token);
