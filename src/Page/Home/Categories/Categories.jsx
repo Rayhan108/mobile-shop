@@ -44,7 +44,7 @@ const Categories = () => {
         {categories.map((category) => (
           <Link
             key={category.id}
-            to={`/category/${category.id}`}
+           
             className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
           >
             <img
