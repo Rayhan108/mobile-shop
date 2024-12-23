@@ -86,18 +86,10 @@ const {user}=useAuth();
                     <span>Add Products</span>
                   </Link>
                 </li>
+                
                 <li className="mb-6">
                   <Link
-                    to="/dashboard/allProducts"
-                    className="flex items-center space-x-4 text-gray-700 hover:text-indigo-600"
-                  >
-                    <FaMobileAlt />
-                    <span>All Products</span>
-                  </Link>
-                </li>
-                <li className="mb-6">
-                  <Link
-                    to="/settings"
+                    to="/dashboard/myProducts"
                     className="flex items-center space-x-4 text-gray-700 hover:text-indigo-600"
                   >
                     <FaCog />

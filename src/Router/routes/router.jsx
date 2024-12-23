@@ -13,6 +13,7 @@ import AddProduct from "../../Page/Dashboard/Seller/AddProduct";
 import SellerRoutes from "../SellerRoutes/SellerRoutes";
 import AllProducts from "../../Page/Dashboard/Seller/AllProducts";
 import Products from "../../Page/Products/Products";
+import UpdateProduct from "../../Page/Dashboard/Seller/updateProduct";
 
 const router = createBrowserRouter([
   {
@@ -33,7 +34,7 @@ const router = createBrowserRouter([
         element: <SignUp />,
       },
       {
-        path: "/allProducts",
+        path: "/products",
         element: <Products />,
       },
     ],
@@ -64,10 +65,18 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "allProducts",
+        path: "myProducts",
         element: (
           <SellerRoutes>
             <AllProducts />
+          </SellerRoutes>
+        ),
+      },
+      {
+        path: "updateProduct/:id",
+        element: (
+          <SellerRoutes>
+            <UpdateProduct />
           </SellerRoutes>
         ),
       },
