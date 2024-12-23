@@ -74,6 +74,23 @@ const AddProduct = () => {
               Category <span className="text-red-500">*</span>
             </label>
             <select
+              {...register("category", { required: true })}
+              className="mt-1 w-full px-4 py-2 border rounded-lg focus:ring-blue-500 focus:border-blue-500"
+            >
+              <option value="">Select Category</option>
+              <option value="mobile">Mobile</option>
+              <option value="tablet">Tablet</option>
+            
+            </select>
+            {errors.categoty && (
+              <span className="text-red-600 text-sm">Category required</span>
+            )}
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700">
+              Brand <span className="text-red-500">*</span>
+            </label>
+            <select
               {...register("brand", { required: true })}
               className="mt-1 w-full px-4 py-2 border rounded-lg focus:ring-blue-500 focus:border-blue-500"
             >

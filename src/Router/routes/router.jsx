@@ -11,6 +11,8 @@ import AdminRoutes from "../AdminRoutes/AdminRoutes";
 import ManageUsers from "../../Page/Dashboard/Admin/ManageUser/ManageUser";
 import AddProduct from "../../Page/Dashboard/Seller/AddProduct";
 import SellerRoutes from "../SellerRoutes/SellerRoutes";
+import AllProducts from "../../Page/Dashboard/Seller/AllProducts";
+import Products from "../../Page/Products/Products";
 
 const router = createBrowserRouter([
   {
@@ -29,6 +31,10 @@ const router = createBrowserRouter([
       {
         path: "/signUp",
         element: <SignUp />,
+      },
+      {
+        path: "/allProducts",
+        element: <Products />,
       },
     ],
   },
@@ -54,6 +60,14 @@ const router = createBrowserRouter([
         element: (
           <SellerRoutes>
             <AddProduct />
+          </SellerRoutes>
+        ),
+      },
+      {
+        path: "allProducts",
+        element: (
+          <SellerRoutes>
+            <AllProducts />
           </SellerRoutes>
         ),
       },
