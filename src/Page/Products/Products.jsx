@@ -1,22 +1,29 @@
 import { useEffect, useState } from "react";
+import useAuth from "../../hooks/useAuth";
+import axios from "axios";
 
 
 const Products = () => {
+    const {setLoader}=useAuth();
     const [products, setProducts] = useState([]);
-    const [filteredProducts, setFilteredProducts] = useState([]);
+
     const [searchTerm, setSearchTerm] = useState("");
     const [categoryFilter, setCategoryFilter] = useState("");
     const [brandFilter, setBrandFilter] = useState("");
     const [sortOrder, setSortOrder] = useState("asc");
   
     useEffect(() => {
-      fetch("http://localhost:5000/allProducts")
-        .then((res) => res.json())
-        .then((data) => {
-          setProducts(data);
-          setFilteredProducts(data);
-        });
-    }, []);
+        setLoader(true);
+        const fetch =async()=>{
+            axios.get(`http://localhost:5000/allProducts?title=${searchTerm}&sort=${sortOrder}&brand=${brandFilter}&category=${categoryFilter}`)
+            .then((res)=>{
+                setProducts(res?.data)
+                setLoader(false)
+            })
+        }
+        fetch();
+ 
+    }, [searchTerm,sortOrder,brandFilter,categoryFilter]);
   
     return (
         <div className="flex flex-col md:flex-row min-h-screen bg-gray-100">
