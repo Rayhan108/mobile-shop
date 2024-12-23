@@ -22,21 +22,22 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
+      setLoader(false);
       // console.log(currentUser);
 
       //get jwt token 
-      if(currentUser){
-        axios.post("http://localhost:5000/authentication",{ email:currentUser?.email,
-        }).then((data)=>{
-          if(data?.data){
-            localStorage.setItem("access-token",data?.data?.token);
-            setLoader(false)
-          }
-        })
-      }else{
-        localStorage.removeItem("access-token");
-        setLoader(false);
-      }
+      // if(currentUser){
+      //   axios.post("http://localhost:5000/authentication",{ email:currentUser?.email,
+      //   }).then((data)=>{
+      //     if(data?.data){
+      //       localStorage.setItem("access-token",data?.data?.token);
+      //       setLoader(false)
+      //     }
+      //   })
+      // }else{
+      //   localStorage.removeItem("access-token");
+      //   setLoader(false);
+      // }
     });
     return () => {
       return unsubscribe();

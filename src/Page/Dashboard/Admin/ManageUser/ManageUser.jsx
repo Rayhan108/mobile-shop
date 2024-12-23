@@ -20,7 +20,7 @@ const ManageUsers = () => {
 
     //   make admin
       const handleMakeAdmin = (user) => {
-        const token = localStorage.getItem("access-token");
+        // const token = localStorage.getItem("access-token");
         // axios.patch(`http://localhost:5000/admin/${user._id}`,{
         //     headers:{
         //         authorization: `Bearer ${token}`
@@ -30,10 +30,6 @@ const ManageUsers = () => {
             `http://localhost:5000/admin/${user._id}`,
             {
               method: "PATCH",
-            },{
-                headers:{
-                    authorization:`Bearer ${token}`
-                }
             }
           )
         .then((res) => res.json())
@@ -62,10 +58,34 @@ const ManageUsers = () => {
         })
         .then(res=>res.json())
         .then(data=>{
-            console.log(data);
+            // console.log(data);
             if(data.modifiedCount){
                 refetch();
                 toast.success(`${user.name} is an Seller Now!`)
+            }
+        })
+      
+      
+    }
+    //delete user
+    const handleDelete =(user)=>{
+        // const token = localStorage.getItem("access-token");
+        // console.log(token);
+        // axios.patch(`http://localhost:5000/seller/${user._id}`,{
+        //     headers:{
+        //         Authorization: `Bearer ${token}`
+        //     }
+        // })  
+        fetch( `http://localhost:5000/user/delete/${user._id}`,{
+            method:"DELETE",
+        })
+        .then(res=>res.json())
+        .then(data=>{
+            console.log(data);
+            if(data?.deletedCount
+            ){
+                refetch();
+                toast.success(`${user.name} is Deleted!`)
             }
         })
       
@@ -88,11 +108,12 @@ const ManageUsers = () => {
                         <th className="px-4 py-2">Email</th>
                         <th className="px-4 py-2">Instructor</th>
                         <th className="px-4 py-2">Admin</th>
+                        <th className="px-4 py-2">Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     {
-                        allUsers.map((user, idx) => <ManageUsersTable key={user?._id} user={user} idx={idx} handleMakeAdmin={handleMakeAdmin} handlemakeSeller={handlemakeSeller}></ManageUsersTable>)
+                        allUsers.map((user, idx) => <ManageUsersTable key={user?._id} user={user} idx={idx} handleMakeAdmin={handleMakeAdmin} handlemakeSeller={handlemakeSeller} handleDelete={handleDelete}></ManageUsersTable>)
                     }
                 </tbody>
             </table>

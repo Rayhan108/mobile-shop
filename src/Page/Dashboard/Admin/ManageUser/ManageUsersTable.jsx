@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 
 
-const ManageUsersTable = ({user,idx,handleMakeAdmin,handlemakeSeller}) => {
+const ManageUsersTable = ({user,idx,handleMakeAdmin,handlemakeSeller,handleDelete}) => {
     //  console.log(user);
     
         return (
@@ -27,7 +27,7 @@ const ManageUsersTable = ({user,idx,handleMakeAdmin,handlemakeSeller}) => {
               <button
                 disabled={user.role === "seller" ||user?.role === "admin"}
                 onClick={() => handlemakeSeller(user)}
-                className="btn btn-sm md:btn-md lg:btn-lg"
+                className="btn btn-sm md:btn-md "
               >
                 Make Seller
               </button>
@@ -36,9 +36,18 @@ const ManageUsersTable = ({user,idx,handleMakeAdmin,handlemakeSeller}) => {
               <button
                 disabled={user.role === "admin"}
                 onClick={() => handleMakeAdmin(user)}
-                className="btn btn-sm md:btn-md lg:btn-lg"
+                className="btn btn-sm md:btn-md "
               >
                 Make Admin
+              </button>
+            </td>
+            <td className="px-2 py-1 sm:px-4 sm:py-2">
+              <button
+                
+                onClick={() => handleDelete(user)}
+                className="btn btn-sm md:btn-md "
+              >
+               Delete
               </button>
             </td>
           </tr>
