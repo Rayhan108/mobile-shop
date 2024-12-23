@@ -1,6 +1,10 @@
 import { useLoaderData } from "react-router-dom";
+import useSeller from "../../hooks/useSeller";
+import useAdmin from "../../hooks/useAdmin";
 
 const ProductDetails = () => {
+    const [isSeller] = useSeller();
+    const [isAdmin] = useAdmin();
     const product = useLoaderData()
     const {title,productImg,brand,price,quantity,description,category}=product;
     return (
@@ -46,7 +50,7 @@ const ProductDetails = () => {
                 <p className="text-gray-600 mt-2">{category}</p>
               </div>
             </div>
-            <div className="sm:col-span-4 text-center mt-8 flex justify-center gap-4">
+  {   !isAdmin && !isSeller &&       <div className="sm:col-span-4 text-center mt-8 flex justify-center gap-4">
   <button
     className="bg-green-600 hover:bg-green-700 text-white font-bold py-4 px-12 rounded-lg transition duration-300"
   >
@@ -58,7 +62,7 @@ const ProductDetails = () => {
     Add to Wishlist
   </button>
 </div>
-
+}
             </div>
           </div>
         </div>

@@ -2,10 +2,16 @@ import { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import useSeller from "../../hooks/useSeller";
+import useAdmin from "../../hooks/useAdmin";
+import toast from "react-hot-toast";
 
 
 const Products = () => {
-    const {setLoader}=useAuth();
+    const [isSeller] = useSeller();
+    const [isAdmin] = useAdmin();
+   
+    const {setLoader,user}=useAuth();
     const [products, setProducts] = useState([]);
 
     const [searchTerm, setSearchTerm] = useState("");
@@ -25,6 +31,38 @@ const Products = () => {
         fetch();
  
     }, [searchTerm,sortOrder,brandFilter,categoryFilter]);
+
+
+    const handleAddToCart=(id,email)=>{
+
+        fetch( `http://localhost:5000/addToCart/${id}/${email}`,{
+            method:"POST",
+        })
+        .then(res=>res.json())
+        .then(data=>{
+            // console.log(data);
+            if(data.insertedId
+            ){
+               
+                toast.success(`Successfully Added on cart!`)
+            }
+        })    
+      }
+    const handleAddToWishList=(id,email)=>{
+
+        fetch( `http://localhost:5000/wishList/${id}/${email}`,{
+            method:"POST",
+        })
+        .then(res=>res.json())
+        .then(data=>{
+            // console.log(data);
+            if(data.insertedId
+            ){
+               
+                toast.success(`Successfully Added on Wish List!`)
+            }
+        })    
+      }
   
     return (
         <div className="flex flex-col md:flex-row min-h-screen bg-gray-100">
@@ -94,18 +132,18 @@ const Products = () => {
       <p className="text-gray-600 text-center">{product.category}</p>
       <p className="text-gray-900 font-bold text-center">${product.price}</p>
 
-      <div className="flex justify-center gap-4 mt-4">
-        <button
-          className="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-6 rounded-md transition duration-300"
-        >
-          Add to Cart
-        </button>
-        <button
-          className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-md transition duration-300"
-        >
-          Add to Wishlist
-        </button>
-      </div>
+  { !isAdmin && !isSeller && <div className="flex justify-center gap-4 mt-4">
+    <button onClick={()=>handleAddToCart(product?._id,user?.email)}
+        className="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-6 rounded-md transition duration-300"
+    >
+        Add to Cart
+    </button>
+    <button onClick={()=>handleAddToWishList(product?._id,user?.email)}
+        className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-md transition duration-300"
+    >
+        Add to Wishlist
+    </button>
+    </div>}
     </div>
   ))}
 </div>

@@ -17,6 +17,8 @@ import UpdateProduct from "../../Page/Dashboard/Seller/updateProduct";
 import About from "../../Page/About/About";
 import ContactPage from "../../Page/Contact/ContactPage";
 import ProductDetails from "../../Page/ProductDetails/ProductDetails";
+import MyCart from "../../Page/MyCart/MyCart";
+import WishList from "../../Page/WishList/WishList";
 
 const router = createBrowserRouter([
   {
@@ -55,6 +57,13 @@ const router = createBrowserRouter([
         </PrivetRoute>,
          loader:({params})=>fetch(`http://localhost:5000/single-product/${params.id}`)
       },
+      {
+        path: "/cart",
+        element:<PrivetRoute>
+          <MyCart/>
+        </PrivetRoute>,
+       
+      },
     ],
   },
   {
@@ -72,6 +81,14 @@ const router = createBrowserRouter([
           <AdminRoutes>
             <ManageUsers />
           </AdminRoutes>
+        ),
+      },
+      {
+        path: "wishList",
+        element: (
+         
+            <WishList />
+         
         ),
       },
       {

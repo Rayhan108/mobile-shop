@@ -114,7 +114,7 @@ const {user}=useAuth();
            
                 <li className="mb-6">
                   <Link
-                    to="/wishList"
+                    to="/dashboard/wishList"
                     className="flex items-center space-x-4 text-gray-700 hover:text-indigo-600"
                   >
                     <TbJewishStar />

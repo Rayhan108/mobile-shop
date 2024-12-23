@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import toast from "react-hot-toast";
-
+import { FaCartShopping } from "react-icons/fa6";
 const Navbar = () => {
     const {user,logout}=useAuth();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -40,6 +40,7 @@ const Navbar = () => {
             <li><Link to="/products">Product</Link></li>
             <li><Link to="/about">About</Link></li>
             <li><Link to="/contact">Contact</Link></li>
+            <li><Link to="/cart"><FaCartShopping size={20}/></Link></li>
           </ul>
         </div>
         <div className="flex-none lg:hidden">
@@ -54,6 +55,8 @@ const Navbar = () => {
               <li><Link to="/products">Product</Link></li>
             <li><Link to="/about">About</Link></li>
             <li><Link to="/contact">Contact</Link></li>
+            <li><Link to="/cart"><FaCartShopping /></Link></li>
+
             </ul>
           </div>
         )}
