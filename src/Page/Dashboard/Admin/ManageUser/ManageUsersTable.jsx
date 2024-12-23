@@ -25,7 +25,7 @@ const ManageUsersTable = ({user,idx,handleMakeAdmin,handlemakeSeller}) => {
             <td className="px-2 py-1 sm:px-4 sm:py-2">{user.email}</td>
             <td className="px-2 py-1 sm:px-4 sm:py-2">
               <button
-                disabled={user.role === "seller"}
+                disabled={user.role === "seller" ||user?.role === "admin"}
                 onClick={() => handlemakeSeller(user)}
                 className="btn btn-sm md:btn-md lg:btn-lg"
               >

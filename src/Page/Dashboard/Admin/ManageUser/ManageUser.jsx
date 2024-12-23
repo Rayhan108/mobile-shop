@@ -20,24 +20,43 @@ const ManageUsers = () => {
 
     //   make admin
       const handleMakeAdmin = (user) => {
+        const token = localStorage.getItem("access-token");
+        // axios.patch(`http://localhost:5000/admin/${user._id}`,{
+        //     headers:{
+        //         authorization: `Bearer ${token}`
+        //     }
+        // })
         fetch(
-          `http://localhost:5000/admin/${user._id}`,
-          {
-            method: "PATCH",
-          }
-        )
-          .then((res) => res.json())
-          .then((data) => {
-            // console.log(data);
-            if (data.modifiedCount) {
-              refetch();
-               
-              toast.success(`${user.name} is an Admin Now!`)
+            `http://localhost:5000/admin/${user._id}`,
+            {
+              method: "PATCH",
+            },{
+                headers:{
+                    authorization:`Bearer ${token}`
+                }
             }
-          });
+          )
+        .then((res) => res.json())
+        .then((data) => {
+          // console.log(data);
+          if (data.modifiedCount) {
+            refetch();
+             
+            toast.success(`${user.name} is an Admin Now!`)
+          }
+        }); 
+    
+        
       };
     //   make seller
     const handlemakeSeller =(user)=>{
+        // const token = localStorage.getItem("access-token");
+        // console.log(token);
+        // axios.patch(`http://localhost:5000/seller/${user._id}`,{
+        //     headers:{
+        //         Authorization: `Bearer ${token}`
+        //     }
+        // })  
         fetch( `http://localhost:5000/seller/${user._id}`,{
             method:"PATCH",
         })
@@ -49,6 +68,8 @@ const ManageUsers = () => {
                 toast.success(`${user.name} is an Seller Now!`)
             }
         })
+      
+      
     }
 
     return (
