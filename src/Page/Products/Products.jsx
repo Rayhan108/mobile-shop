@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 
 const Products = () => {
@@ -77,20 +78,39 @@ const Products = () => {
           </div>
   
           {/* Products Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 bg-white lg:grid-cols-3 gap-6">
-            {products.map((product) => (
-              <div key={product._id} className="bg-gray-100 p-4 border border-black rounded-lg shadow">
-                <img
-                  src={product.productImg}
-                  alt={product.title}
-                  className="w-full h-48 object-cover rounded-lg"
-                />
-                <h3 className="mt-4 text-lg font-semibold">{product.title}</h3>
-                <p className="text-gray-600">{product.category}</p>
-                <p className="text-gray-900 font-bold">${product.price}</p>
-              </div>
-            ))}
-          </div>
+          <div className="grid grid-cols-1  sm:grid-cols-2 lg:grid-cols-3 gap-6">
+  {products.map((product) => (
+    <div key={product._id} className="bg-gray-100 border border-black p-4   rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300">
+      <Link to={`/single-product/${product?._id}`}>
+        <div className="relative">
+          <img
+            src={product.productImg}
+            alt={product.title}
+            className="w-full h-48 object-cover rounded-lg transition-transform transform hover:scale-105 duration-300"
+          />
+        </div>
+      </Link>
+      <h3 className="mt-4 text-lg font-semibold text-center">{product.title}</h3>
+      <p className="text-gray-600 text-center">{product.category}</p>
+      <p className="text-gray-900 font-bold text-center">${product.price}</p>
+
+      <div className="flex justify-center gap-4 mt-4">
+        <button
+          className="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-6 rounded-md transition duration-300"
+        >
+          Add to Cart
+        </button>
+        <button
+          className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-md transition duration-300"
+        >
+          Add to Wishlist
+        </button>
+      </div>
+    </div>
+  ))}
+</div>
+
+
         </main>
       </div>
     );

@@ -14,6 +14,9 @@ import SellerRoutes from "../SellerRoutes/SellerRoutes";
 import AllProducts from "../../Page/Dashboard/Seller/AllProducts";
 import Products from "../../Page/Products/Products";
 import UpdateProduct from "../../Page/Dashboard/Seller/updateProduct";
+import About from "../../Page/About/About";
+import ContactPage from "../../Page/Contact/ContactPage";
+import ProductDetails from "../../Page/ProductDetails/ProductDetails";
 
 const router = createBrowserRouter([
   {
@@ -36,6 +39,21 @@ const router = createBrowserRouter([
       {
         path: "/products",
         element: <Products />,
+      },
+      {
+        path: "/about",
+        element: <About />,
+      },
+      {
+        path: "/contact",
+        element: <ContactPage />,
+      },
+      {
+        path: "/single-product/:id",
+        element:<PrivetRoute>
+          <ProductDetails/>
+        </PrivetRoute>,
+         loader:({params})=>fetch(`http://localhost:5000/single-product/${params.id}`)
       },
     ],
   },

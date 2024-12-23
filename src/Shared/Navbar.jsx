@@ -38,8 +38,8 @@ const Navbar = () => {
           <ul className="menu menu-horizontal px-1">
             <li><Link to="/">Home</Link></li>
             <li><Link to="/products">Product</Link></li>
-            <li><Link href="#about">About</Link></li>
-            <li><Link href="#contact">Contact</Link></li>
+            <li><Link to="/about">About</Link></li>
+            <li><Link to="/contact">Contact</Link></li>
           </ul>
         </div>
         <div className="flex-none lg:hidden">
@@ -51,9 +51,9 @@ const Navbar = () => {
           <div className="absolute top-16 right-0 w-full bg-base-100 lg:hidden shadow-lg z-40">
             <ul className="menu menu-vertical px-1">
               <li><Link to="/">Home</Link></li>
-              <li><Link href="#about">About</Link></li>
-              <li><Link href="#services">Services</Link></li>
-              <li><Link href="#contact">Contact</Link></li>
+              <li><Link to="/products">Product</Link></li>
+            <li><Link to="/about">About</Link></li>
+            <li><Link to="/contact">Contact</Link></li>
             </ul>
           </div>
         )}
